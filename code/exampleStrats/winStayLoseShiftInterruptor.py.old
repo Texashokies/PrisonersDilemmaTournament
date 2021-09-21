@@ -1,0 +1,23 @@
+def scoreOfLastTurn(history):
+    pointsArray = [[1,5],[0,3]]
+    opponentMove = history[1,-1]
+    myMove = history[0,-1]
+    myScore = pointsArray[myMove][opponentMove]
+    return myScore
+
+def strategy(history, memory):
+    choice = 1
+
+    if history.shape[1] >= 1:
+        lastTurnScore = scoreOfLastTurn(history)
+        if lastTurnScore == 1 or lastTurnScore == 0:
+            choice = (history[0,-1] - 1) * -1
+        else:
+            choice = history[0,-1]
+
+    if history.shape[1] == 200:
+        if 0 not in history[1]:
+            choice = 0
+
+    return choice, memory
+
